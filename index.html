@@ -5,218 +5,53 @@
 <title>XpSiyam</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: Arial, sans-serif;
-}
-
-body{
-  background:#f4f6fb;
-  overflow-x:hidden;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+body{background:#f4f6fb;overflow-x:hidden;}
 
 /* HEADER */
-header{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:60px;
-  background:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 2px 10px rgba(0,0,0,0.1);
-  z-index:1000;
-}
-
-.menu-btn{
-  position:absolute;
-  left:15px;
-  font-size:26px;
-  cursor:pointer;
-}
-
-.logo{
-  font-size:22px;
-  font-weight:bold;
-}
+header{position:fixed;top:0;left:0;width:100%;height:60px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,0.1);z-index:1000;}
+.menu-btn{position:absolute;left:15px;font-size:26px;cursor:pointer;}
+.logo{font-size:22px;font-weight:bold;}
 
 /* SIDE MENU */
-.side-menu{
-  position:fixed;
-  top:0;
-  left:-260px;
-  width:260px;
-  height:100%;
-  background:#111;
-  color:#fff;
-  padding-top:70px;
-  transition:0.3s;
-  z-index:2000;
-}
-
-.side-menu a{
-  display:block;
-  padding:15px 20px;
-  color:#fff;
-  text-decoration:none;
-  border-bottom:1px solid #333;
-}
-
-.side-menu a:hover{
-  background:#222;
-}
+.side-menu{position:fixed;top:0;left:-260px;width:260px;height:100%;background:#111;color:#fff;padding-top:70px;transition:0.3s;z-index:2000;}
+.side-menu a{display:block;padding:15px 20px;color:#fff;text-decoration:none;border-bottom:1px solid #333;}
+.side-menu a:hover{background:#222;}
 
 /* CONTENT */
-.content{
-  padding:90px 15px;
-  animation:fadeIn 0.5s ease;
-}
-
-.hidden{
-  display:none;
-}
-
-@keyframes fadeIn{
-  from{opacity:0; transform:translateY(15px);}
-  to{opacity:1; transform:translateY(0);}
-}
+.content{padding:90px 15px;animation:fadeIn 0.5s ease;}
+.hidden{display:none;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
 
 /* CARDS */
-.card{
-  padding:35px;
-  margin-bottom:20px;
-  border-radius:20px;
-  color:#fff;
-  font-size:26px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 12px 30px rgba(0,0,0,0.18);
-  transition:0.3s;
-}
-
-.card:hover{
-  transform:translateY(-6px) scale(1.02);
-}
-
+.card{padding:35px;margin-bottom:20px;border-radius:20px;color:#fff;font-size:26px;font-weight:bold;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,0.18);transition:0.3s;}
+.card:hover{transform:translateY(-6px) scale(1.02);}
 .academic{background:linear-gradient(135deg,#6a5cff,#9b8cff);}
 .professional{background:linear-gradient(135deg,#00c6ff,#0072ff);}
 .commercial{background:linear-gradient(135deg,#ff7a18,#ffb347);}
 
 /* BOX */
-.box{
-  background:#fff;
-  padding:20px;
-  margin-bottom:15px;
-  border-radius:15px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.1);
-  font-size:18px;
-  font-weight:bold;
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-}
+.box{background:#fff;padding:20px;margin-bottom:15px;border-radius:15px;box-shadow:0 6px 18px rgba(0,0,0,0.1);font-size:18px;font-weight:bold;position:relative;overflow:hidden;cursor:pointer;}
 
 /* ACADEMIC SUBJECT ANIMATIONS */
-.physics::after{
-  content:"⚡";
-  position:absolute;
-  right:20px;
-  font-size:28px;
-  animation:flash 1.2s infinite;
-}
-@keyframes flash{
-  0%,100%{opacity:0;}
-  50%{opacity:1;}
-}
-
-.chemistry::after{
-  content:"🧪";
-  position:absolute;
-  right:20px;
-  font-size:26px;
-  animation:bubble 1.5s infinite;
-}
-
-.math::after{
-  content:"📐";
-  position:absolute;
-  right:20px;
-  font-size:26px;
-  animation:rotate 2s linear infinite;
-}
-@keyframes rotate{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
-}
-
-.biology::after{
-  content:"🧬";
-  position:absolute;
-  right:20px;
-  font-size:26px;
-  animation:pulse 1.3s infinite;
-}
-@keyframes pulse{
-  0%{transform:scale(1);}
-  50%{transform:scale(1.2);}
-  100%{transform:scale(1);}
-}
+.physics::after{content:"⚡";position:absolute;right:20px;font-size:28px;animation:flash 1.2s infinite;}
+@keyframes flash{0%,100%{opacity:0;}50%{opacity:1;}}
+.chemistry::after{content:"🧪";position:absolute;right:20px;font-size:26px;animation:bubble 1.5s infinite;}
+.math::after{content:"📐";position:absolute;right:20px;font-size:26px;animation:rotate 2s linear infinite;}
+@keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.biology::after{content:"🧬";position:absolute;right:20px;font-size:26px;animation:pulse 1.3s infinite;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);}}
 
 /* COMMERCIAL ANIMATIONS */
-.com-ecommerce::after{
-  content:"📦";
-  position:absolute;
-  right:15px;
-  font-size:28px;
-  animation:float 2s ease-in-out infinite;
-}
-
-.com-dropshipping::after{
-  content:"🚚";
-  position:absolute;
-  right:15px;
-  font-size:28px;
-  animation:float 2.5s ease-in-out infinite;
-}
-
-.com-biman::after{
-  content:"✈️";
-  position:absolute;
-  right:15px;
-  font-size:28px;
-  animation:fly 3s linear infinite;
-}
-
-@keyframes float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-8px);}
-}
-
-@keyframes fly{
-  0%{transform:translateX(-10px);}
-  50%{transform:translateX(10px);}
-  100%{transform:translateX(-10px);}
-}
+.com-ecommerce::after{content:"📦";position:absolute;right:15px;font-size:28px;animation:float 2s ease-in-out infinite;}
+.com-dropshipping::after{content:"🚚";position:absolute;right:15px;font-size:28px;animation:float 2.5s ease-in-out infinite;}
+.com-biman::after{content:"✈️";position:absolute;right:15px;font-size:28px;animation:fly 3s linear infinite;}
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes fly{0%{transform:translateX(-10px);}50%{transform:translateX(10px);}100%{transform:translateX(-10px);}}
 
 /* ABOUT */
-.about-box{
-  background:#fff;
-  padding:25px;
-  border-radius:18px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.12);
-  text-align:center;
-}
-.profile-pic{
-  width:120px;
-  height:120px;
-  border-radius:50%;
-  border:4px solid #6a5cff;
-  margin-bottom:15px;
-}
+.about-box{background:#fff;padding:25px;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,0.12);text-align:center;}
+.profile-pic{width:120px;height:120px;border-radius:50%;border:4px solid #6a5cff;margin-bottom:15px;}
 </style>
 </head>
 
@@ -294,54 +129,67 @@ function hideAll(){
   about.classList.add("hidden");
 }
 
-function showHome(){
+function showHome(push=true){
   hideAll();
   home.classList.remove("hidden");
   closeMenu();
+  if(push) history.pushState({page:"home"},"Home","#home");
 }
-
-function showAcademic(){
+function showAcademic(push=true){
   hideAll();
   academic.classList.remove("hidden");
   closeMenu();
+  if(push) history.pushState({page:"academic"},"Academic","#academic");
 }
-
-function showSSC(){
+function showSSC(push=true){
   hideAll();
   ssc.classList.remove("hidden");
   closeMenu();
+  if(push) history.pushState({page:"ssc"},"SSC","#ssc");
 }
-
-function showProfessional(){
+function showProfessional(push=true){
   hideAll();
   professional.classList.remove("hidden");
   closeMenu();
+  if(push) history.pushState({page:"professional"},"Professional","#professional");
 }
-
-function showCommercial(){
+function showCommercial(push=true){
   hideAll();
   commercial.classList.remove("hidden");
   closeMenu();
+  if(push) history.pushState({page:"commercial"},"Commercial","#commercial");
 }
-
-function showAbout(){
+function showAbout(push=true){
   hideAll();
   about.classList.remove("hidden");
   closeMenu();
+  if(push) history.pushState({page:"about"},"About","#about");
 }
 
 function closeMenu(){
   let m=sideMenu;
-  if(m){
-    m.style.left="-260px";
+  if(m){m.style.left="-260px";}
+}
+
+// BACK BUTTON STEP-BY-STEP
+window.onpopstate=function(event){
+  if(event.state){
+    switch(event.state.page){
+      case "home": showHome(false); break;
+      case "academic": showAcademic(false); break;
+      case "ssc": showSSC(false); break;
+      case "professional": showProfessional(false); break;
+      case "commercial": showCommercial(false); break;
+      case "about": showAbout(false); break;
+      default: showHome(false); break;
+    }
+  } else {
+    showHome(false);
   }
 }
 
-// Back button safe
-window.onpopstate = function(event){
-  hideAll();
-  home.classList.remove("hidden");
-};
+// INITIAL STATE
+history.replaceState({page:"home"},"Home","#home");
 </script>
 
 </body>
