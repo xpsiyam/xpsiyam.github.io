@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>XpSiyam</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#f4f6fb;
+  overflow-x:hidden;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:60px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  z-index:1000;
+}
+
+.menu-btn{
+  position:absolute;
+  left:15px;
+  font-size:26px;
+  cursor:pointer;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* SIDE MENU */
+.side-menu{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:#111;
+  color:#fff;
+  padding-top:70px;
+  transition:0.3s;
+  z-index:2000;
+}
+
+.side-menu a{
+  display:block;
+  padding:15px 20px;
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px solid #333;
+}
+
+.side-menu a:hover{
+  background:#222;
+}
+
+/* CONTENT */
+.content{
+  padding:90px 15px;
+  animation:fadeIn 0.5s ease;
+}
+
+.hidden{
+  display:none;
+}
+
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(15px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* CARDS */
+.card{
+  padding:35px;
+  margin-bottom:20px;
+  border-radius:20px;
+  color:#fff;
+  font-size:26px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 12px 30px rgba(0,0,0,0.18);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-6px) scale(1.02);
+}
+
+.academic{background:linear-gradient(135deg,#6a5cff,#9b8cff);}
+.professional{background:linear-gradient(135deg,#00c6ff,#0072ff);}
+.commercial{background:linear-gradient(135deg,#ff7a18,#ffb347);}
+
+/* BOX */
+.box{
+  background:#fff;
+  padding:20px;
+  margin-bottom:15px;
+  border-radius:15px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.1);
+  font-size:18px;
+  font-weight:bold;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+}
+
+/* ACADEMIC SUBJECT ANIMATIONS */
+.physics::after{
+  content:"⚡";
+  position:absolute;
+  right:20px;
+  font-size:28px;
+  animation:flash 1.2s infinite;
+}
+@keyframes flash{
+  0%,100%{opacity:0;}
+  50%{opacity:1;}
+}
+
+.chemistry::after{
+  content:"🧪";
+  position:absolute;
+  right:20px;
+  font-size:26px;
+  animation:bubble 1.5s infinite;
+}
+
+.math::after{
+  content:"📐";
+  position:absolute;
+  right:20px;
+  font-size:26px;
+  animation:rotate 2s linear infinite;
+}
+@keyframes rotate{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
+}
+
+.biology::after{
+  content:"🧬";
+  position:absolute;
+  right:20px;
+  font-size:26px;
+  animation:pulse 1.3s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+  100%{transform:scale(1);}
+}
+
+/* COMMERCIAL ANIMATIONS */
+.com-ecommerce::after{
+  content:"📦";
+  position:absolute;
+  right:15px;
+  font-size:28px;
+  animation:float 2s ease-in-out infinite;
+}
+
+.com-dropshipping::after{
+  content:"🚚";
+  position:absolute;
+  right:15px;
+  font-size:28px;
+  animation:float 2.5s ease-in-out infinite;
+}
+
+.com-biman::after{
+  content:"✈️";
+  position:absolute;
+  right:15px;
+  font-size:28px;
+  animation:fly 3s linear infinite;
+}
+
+@keyframes float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+
+@keyframes fly{
+  0%{transform:translateX(-10px);}
+  50%{transform:translateX(10px);}
+  100%{transform:translateX(-10px);}
+}
+
+/* ABOUT */
+.about-box{
+  background:#fff;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.12);
+  text-align:center;
+}
+.profile-pic{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:4px solid #6a5cff;
+  margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  <div class="logo">XpSiyam</div>
+</header>
+
+<div class="side-menu" id="sideMenu">
+  <a onclick="showHome()">Homepage</a>
+  <a onclick="showHome()">Our Courses</a>
+  <a onclick="showAbout()">About Us</a>
+</div>
+
+<!-- HOME -->
+<div class="content" id="home">
+  <div class="card academic" onclick="showAcademic()">Academic</div>
+  <div class="card professional" onclick="showProfessional()">Professional</div>
+  <div class="card commercial" onclick="showCommercial()">Commercial</div>
+</div>
+
+<!-- ACADEMIC -->
+<div class="content hidden" id="academic">
+  <div class="box" onclick="showSSC()">SSC</div>
+  <div class="box" onclick="showSSC()">HSC</div>
+</div>
+
+<!-- SSC / HSC SUBJECTS -->
+<div class="content hidden" id="ssc">
+  <div class="box physics">Physics</div>
+  <div class="box chemistry">Chemistry</div>
+  <div class="box math">Higher Mathematics</div>
+  <div class="box biology">Biology</div>
+</div>
+
+<!-- PROFESSIONAL -->
+<div class="content hidden" id="professional">
+  <div class="box">Web Development 💻</div>
+  <div class="box">Cyber Security 🔐</div>
+  <div class="box">Networking 🌐</div>
+</div>
+
+<!-- COMMERCIAL -->
+<div class="content hidden" id="commercial">
+  <div class="box com-ecommerce">E-Commerce</div>
+  <div class="box com-dropshipping">Dropshipping</div>
+  <div class="box com-biman">Biman / Transport Visualization</div>
+</div>
+
+<!-- ABOUT -->
+<div class="content hidden" id="about">
+  <div class="about-box">
+    <img src="images/siyam.jpg" class="profile-pic">
+    <h2>Siyam Islam</h2>
+    <p>I am a student of CSE Department of Islamic University, Bangladesh.</p>
+    <p>📧 islamsiyam6010@gmail.com</p>
+    <p>💬 01939707648</p>
+  </div>
+</div>
+
+<script>
+function toggleMenu(){
+  let m=sideMenu;
+  m.style.left=(m.style.left==="0px")?"-260px":"0px";
+}
+
+function hideAll(){
+  home.classList.add("hidden");
+  academic.classList.add("hidden");
+  ssc.classList.add("hidden");
+  professional.classList.add("hidden");
+  commercial.classList.add("hidden");
+  about.classList.add("hidden");
+}
+
+function showHome(){
+  hideAll();
+  home.classList.remove("hidden");
+  closeMenu();
+}
+
+function showAcademic(){
+  hideAll();
+  academic.classList.remove("hidden");
+  closeMenu();
+}
+
+function showSSC(){
+  hideAll();
+  ssc.classList.remove("hidden");
+  closeMenu();
+}
+
+function showProfessional(){
+  hideAll();
+  professional.classList.remove("hidden");
+  closeMenu();
+}
+
+function showCommercial(){
+  hideAll();
+  commercial.classList.remove("hidden");
+  closeMenu();
+}
+
+function showAbout(){
+  hideAll();
+  about.classList.remove("hidden");
+  closeMenu();
+}
+
+function closeMenu(){
+  let m=sideMenu;
+  if(m){
+    m.style.left="-260px";
+  }
+}
+
+// Back button safe
+window.onpopstate = function(event){
+  hideAll();
+  home.classList.remove("hidden");
+};
+</script>
+
+</body>
+</html>
