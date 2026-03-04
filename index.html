@@ -1,104 +1,71 @@
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <unistd.h>
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
-#define SIZE 100
-#define STEPS 800
+# Grid size
+Nx, Ny = 200, 200
+dx = 1.0
+dt = 0.1
+c = 1.0
 
-#define C 1.0
-#define DT 0.1
-#define DX 1.0
-#define DAMPING 0.999
+# Stability condition
+coeff = (c * dt / dx) ** 2
 
-double u[SIZE][SIZE];
-double u_prev[SIZE][SIZE];
-double u_next[SIZE][SIZE];
+# Time steps
+steps = 300
 
-double coeff;
+# Wave arrays
+u = np.zeros((Nx, Ny))
+u_prev = np.zeros((Nx, Ny))
+u_next = np.zeros((Nx, Ny))
 
-double gaussian(double x, double y, double cx, double cy, double sigma) {
-    double dx = x - cx;
-    double dy = y - cy;
-    return exp(-(dx*dx + dy*dy) / (2 * sigma * sigma));
-}
+# Initial Gaussian pulse (single spherical source)
+cx, cy = Nx//2, Ny//2
+sigma = 5
 
-void initialize() {
-    for(int i=0;i<SIZE;i++){
-        for(int j=0;j<SIZE;j++){
-            u[i][j] = 0.0;
-            u_prev[i][j] = 0.0;
-        }
-    }
+for i in range(Nx):
+    for j in range(Ny):
+        u[i, j] = np.exp(-((i-cx)**2 + (j-cy)**2) / (2*sigma**2))
 
-    for(int i=0;i<SIZE;i++){
-        for(int j=0;j<SIZE;j++){
-            u[i][j] = gaussian(i,j,SIZE/2,SIZE/2,3);
-        }
-    }
+# Setup plot
+fig = plt.figure(figsize=(8,6))
+ax = fig.add_subplot(111, projection='3d')
+X = np.arange(0, Nx)
+Y = np.arange(0, Ny)
+X, Y = np.meshgrid(X, Y)
 
-    coeff = (C*C*DT*DT)/(DX*DX);
-}
+surf = [ax.plot_surface(X, Y, u, cmap='Blues')]
 
-void update(int t) {
+ax.set_zlim(-1, 1)
+ax.set_title("Spherical Wave Simulation")
 
-    double frequency = 0.05;
-    u[SIZE/2][SIZE/2] += sin(2*M_PI*frequency*t);
+def update(frame):
+    global u, u_prev, u_next, surf
 
-    for(int i=1;i<SIZE-1;i++){
-        for(int j=1;j<SIZE-1;j++){
+    for i in range(1, Nx-1):
+        for j in range(1, Ny-1):
+            u_next[i, j] = (
+                2*u[i, j] - u_prev[i, j]
+                + coeff * (
+                    u[i+1, j] + u[i-1, j] +
+                    u[i, j+1] + u[i, j-1]
+                    - 4*u[i, j]
+                )
+            )
 
-            u_next[i][j] = 2*u[i][j] - u_prev[i][j] +
-                coeff * (
-                u[i+1][j] + u[i-1][j] +
-                u[i][j+1] + u[i][j-1] -
-                4*u[i][j]
-                );
+    u_prev[:, :] = u
+    u[:, :] = u_next
 
-            u_next[i][j] *= DAMPING;
-        }
-    }
+    ax.clear()
+    ax.set_zlim(-1, 1)
+    ax.set_title(f"Spherical Wave - Time Step {frame}")
+    surf[0] = ax.plot_surface(X, Y, u, cmap='Blues')
 
-    for(int i=1;i<SIZE-1;i++){
-        for(int j=1;j<SIZE-1;j++){
-            u_prev[i][j] = u[i][j];
-            u[i][j] = u_next[i][j];
-        }
-    }
-}
+    return surf
 
-void display() {
+ani = animation.FuncAnimation(fig, update, frames=steps, interval=30)
 
-    system("clear");   // Linux clear
+# Save video
+ani.save("spherical_wave.mp4", writer="ffmpeg", fps=30)
 
-    for(int i=0;i<SIZE;i+=2){
-        for(int j=0;j<SIZE;j+=2){
-
-            double val = u[i][j];
-
-            if(val > 0.8) printf("@");
-            else if(val > 0.4) printf("O");
-            else if(val > 0.1) printf("*");
-            else if(val < -0.8) printf("#");
-            else if(val < -0.4) printf("x");
-            else if(val < -0.1) printf("-");
-            else printf(" ");
-        }
-        printf("\n");
-    }
-}
-
-int main() {
-
-    initialize();
-
-    for(int t=0;t<STEPS;t++){
-        update(t);
-        display();
-        usleep(20000);
-    }
-
-    return 0;
-}
-
-                   
+plt.show()
