@@ -1,71 +1,199 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+Perfect! Everything is working! Now let me create a deployment guide and finalize the project:
+Action: file_editor create /app/DEPLOYMENT.md --file-text "# Risk Toshop - Deployment Guide
 
-# Grid size
-Nx, Ny = 200, 200
-dx = 1.0
-dt = 0.1
-c = 1.0
+## 🚀 Quick Start
 
-# Stability condition
-coeff = (c * dt / dx) ** 2
+The application is already running and ready to use!
 
-# Time steps
-steps = 300
+### Current Status
+- ✅ Backend API running on port 8001
+- ✅ Frontend running on port 3000
+- ✅ 8 Products pre-loaded
+- ✅ 9 Categories configured
+- ✅ All payment methods integrated
 
-# Wave arrays
-u = np.zeros((Nx, Ny))
-u_prev = np.zeros((Nx, Ny))
-u_next = np.zeros((Nx, Ny))
+## 📍 Access Points
 
-# Initial Gaussian pulse (single spherical source)
-cx, cy = Nx//2, Ny//2
-sigma = 5
+### Development
+- **Frontend:** http://localhost:3000
+- **Backend API:** http://localhost:8001
+- **API Documentation:** http://localhost:8001/docs
 
-for i in range(Nx):
-    for j in range(Ny):
-        u[i, j] = np.exp(-((i-cx)**2 + (j-cy)**2) / (2*sigma**2))
+### Test the Application
+```bash
+bash /app/test_api.sh
+```
 
-# Setup plot
-fig = plt.figure(figsize=(8,6))
-ax = fig.add_subplot(111, projection='3d')
-X = np.arange(0, Nx)
-Y = np.arange(0, Ny)
-X, Y = np.meshgrid(X, Y)
+## 🔄 Service Management
 
-surf = [ax.plot_surface(X, Y, u, cmap='Blues')]
+### Check Status
+```bash
+ps aux | grep -E \"(uvicorn|vite)\"
+```
 
-ax.set_zlim(-1, 1)
-ax.set_title("Spherical Wave Simulation")
+### Restart Services
+```bash
+# Kill existing processes
+pkill -f uvicorn
+pkill -f vite
 
-def update(frame):
-    global u, u_prev, u_next, surf
+# Start backend
+cd /app/backend && python -m uvicorn server:app --host 0.0.0.0 --port 8001 --reload &
 
-    for i in range(1, Nx-1):
-        for j in range(1, Ny-1):
-            u_next[i, j] = (
-                2*u[i, j] - u_prev[i, j]
-                + coeff * (
-                    u[i+1, j] + u[i-1, j] +
-                    u[i, j+1] + u[i, j-1]
-                    - 4*u[i, j]
-                )
-            )
+# Start frontend  
+cd /app/frontend && yarn dev &
+```
 
-    u_prev[:, :] = u
-    u[:, :] = u_next
+## 📦 What's Included
 
-    ax.clear()
-    ax.set_zlim(-1, 1)
-    ax.set_title(f"Spherical Wave - Time Step {frame}")
-    surf[0] = ax.plot_surface(X, Y, u, cmap='Blues')
+### Products (8 items)
+1. Premium Black Hoodie - ৳2,499 (29% off)
+2. Luxury Gold T-Shirt - ৳1,299 (32% off)
+3. Premium Polo Shirt - ৳1,799 (28% off)
+4. Designer Panjabi - ৳3,499 (30% off)
+5. Winter Jacket Premium - ৳4,999 (29% off)
+6. Casual Formal Shirt - ৳1,599 (27% off)
+7. Premium Denim Pant - ৳2,299 (23% off)
+8. Luxury Watch - ৳3,999 (33% off)
 
-    return surf
+### Categories
+- T-Shirt (টি-শার্ট)
+- Hoodie (হুডি)
+- Polo (পোলো)
+- Shirt (শার্ট)
+- Pant (প্যান্ট)
+- Panjabi (পাঞ্জাবি)
+- Jacket (জ্যাকেট)
+- Winter Wear (শীতের পোশাক)
+- Accessories (এক্সেসরিজ)
 
-ani = animation.FuncAnimation(fig, update, frames=steps, interval=30)
+### Pages Available
+- `/` - Home (Hero, Live Shopping, Hot Deals, New Arrivals)
+- `/shop` - All Products with Filtering
+- `/product/:id` - Product Details
+- `/cart` - Shopping Cart
+- `/checkout` - Order Placement
+- `/categories` - Browse Categories
 
-# Save video
-ani.save("spherical_wave.mp4", writer="ffmpeg", fps=30)
+### Features Implemented
+✅ Dark luxury design theme
+✅ Bilingual support (English/Bengali)
+✅ Live shopping section
+✅ Product catalog with filtering
+✅ Shopping cart functionality
+✅ Complete checkout flow
+✅ Multiple payment methods
+✅ Trust badges section
+✅ Responsive design
+✅ Product search and filters
+✅ Size and color selection
+✅ Discount badges
+✅ Stock management
 
-plt.show()
+## 🎯 Payment Methods Integrated
+
+All payment methods are clearly displayed:
+- 💵 Cash on Delivery (COD)
+- 📱 bKash / Nagad / Rocket
+- 💳 Credit/Debit Card
+- 🏦 Bank Transfer
+
+## 🌐 API Endpoints
+
+### Products
+- `GET /api/products` - All products
+- `GET /api/products/{id}` - Single product
+- `GET /api/categories` - All categories
+
+### Cart
+- `POST /api/cart/add` - Add to cart
+- `GET /api/cart/{session_id}` - Get cart
+- `DELETE /api/cart/{session_id}/item/{product_id}` - Remove item
+
+### Orders
+- `POST /api/orders` - Place order
+- `GET /api/orders/{id}` - Get order
+
+### Stats
+- `GET /api/stats` - Platform statistics
+
+## 🔧 Configuration Files
+
+### Backend (.env)
+```env
+PORT=8001
+```
+
+### Frontend (.env)
+```env
+VITE_BACKEND_URL=http://localhost:8001
+```
+
+## 📝 Testing Checklist
+
+- [x] Backend API responding
+- [x] Frontend loading
+- [x] Products displayed
+- [x] Categories working
+- [x] Add to cart functional
+- [x] Checkout flow complete
+- [x] Bengali language support
+- [x] Payment methods visible
+- [x] Responsive design
+- [x] Trust badges showing
+
+## 🎨 Design Highlights
+
+### Color Scheme
+- Background: Deep Black (#0a0a0a)
+- Cards: Dark Gray (#1a1a1a)
+- Accent: Rich Gold (#FFD700)
+- Highlight: Bold Red (#C8102E)
+
+### Typography
+- Primary: System fonts
+- Bengali: Noto Sans Bengali
+- Headings: Bold with shimmer effects
+- Body: Clean and readable
+
+### Animations
+- Smooth transitions
+- Hover effects
+- Shimmer on gold text
+- Pulse on live badges
+- Zoom on product images
+
+## 📊 Performance
+
+- Fast loading with Vite
+- Optimized images from Unsplash
+- Lazy loading ready
+- Component-based architecture
+- Minimal bundle size
+
+## 🔐 Security
+
+- CORS configured
+- Input validation with Pydantic
+- Environment variables for config
+- Secure payment method display
+
+## 🚀 Next Steps
+
+To push to GitHub:
+1. Use the \"Save to GitHub\" button in the chat interface
+2. Choose repository name
+3. Code will be pushed automatically
+
+## 📞 Support
+
+For any issues or questions:
+- Check logs: `tail -f /var/log/supervisor/*.log`
+- Test API: `bash /app/test_api.sh`
+- Restart services: Follow service management section above
+
+---
+
+**Risk Toshop - Style With Risk – Live Luxury Deals** 🔥
+"
+Observation: Create successful: /app/DEPLOYMENT.md
