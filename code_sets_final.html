@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>C Programming - Easy 2 per Set (Short Variable Names)</title>
+<style>
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f6f8;
+    color: #1a1a1a;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #2c3e50;
+  }
+  .set-block {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 25px auto;
+    max-width: 950px;
+    padding: 20px 25px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .set-title {
+    color: #ffffff;
+    background: #2c3e50;
+    padding: 8px 14px;
+    border-radius: 6px;
+    display: inline-block;
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .q-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1a5276;
+    margin-top: 22px;
+    margin-bottom: 8px;
+    border-left: 4px solid #1a5276;
+    padding-left: 8px;
+    line-height: 1.4;
+  }
+  .qnum {
+    background: #1a5276;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-right: 6px;
+  }
+  .code-wrap {
+    position: relative;
+  }
+  pre {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    padding: 15px;
+    padding-top: 40px;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 13.5px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  code {
+    font-family: Consolas, "Courier New", monospace;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #34495e;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12.5px;
+    z-index: 2;
+  }
+  .copy-btn:hover {
+    background: #46627a;
+  }
+  .copy-btn.copied {
+    background: #27ae60;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 950px;
+    margin: 20px auto;
+    background: #fff;
+  }
+  th, td {
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 14px;
+  }
+  th {
+    background: #2c3e50;
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+
+<h1>C Programming — প্রতি Set-এর সহজ ২টা প্রশ্ন (Original Q.No + Short Variable)</h1>
+
+<table>
+  <tr><th>Set</th><th>Q.No (আসল সেট অনুযায়ী)</th><th>প্রশ্নের নাম</th></tr>
+  <tr><td>Set-1</td><td>Q1</td><td>Array-তে item-এর LOC বের করা</td></tr>
+  <tr><td>Set-1</td><td>Q3</td><td>Word-এর Occurrence Count</td></tr>
+  <tr><td>Set-2</td><td>Q1</td><td>Array-তে Item Insert (location অনুযায়ী)</td></tr>
+  <tr><td>Set-2</td><td>Q2</td><td>Linked List (Parallel Array) থেকে Item Delete</td></tr>
+  <tr><td>Set-3</td><td>Q1</td><td>Binary Search দিয়ে ITEM-এর LOC বের করা</td></tr>
+  <tr><td>Set-3</td><td>Q2</td><td>Queue-তে Insertion ও Deletion</td></tr>
+  <tr><td>Set-4</td><td>Q1</td><td>Array থেকে Item Delete</td></tr>
+  <tr><td>Set-4</td><td>Q3</td><td>Stack-এর PUSH ও POP</td></tr>
+  <tr><td>Set-5</td><td>Q1</td><td>Linked List (Parallel Array)-এ নতুন Item Insert</td></tr>
+  <tr><td>Set-5</td><td>Q3</td><td>Graph G-এর M x M Adjacency Matrix বের করা</td></tr>
+</table>
+
+<!-- ================= SET 1 ================= -->
+<div class="set-block">
+  <div class="set-title">SET-1</div>
+
+  <div class="q-title"><span class="qnum">Q1</span>Implement the algorithm which finds the LOC of the given item in an array DATA with n &gt; 1 element.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s1q1', this)">Copy</button>
+<pre id="s1q1"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100];      // array
+    int n, x;        // n = total element, x = search item
+    int i, loc = -1; // i = loop, loc = location
+
+    printf("Enter number of elements: ");
+    scanf("%d", &amp;n);
+
+    printf("Enter array elements:\n");
+
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf("%d", &amp;a[i]);
+    }
+
+    printf("Enter item to search: ");
+    scanf("%d", &amp;x);
+
+    for(i = 0; i &lt; n; i++)
+    {
+        if(a[i] == x)
+        {
+            loc = i + 1;
+            break;
+        }
+    }
+
+    if(loc == -1)
+        printf("Item not found\n");
+    else
+        printf("Location = %d\n", loc);
+
+    return 0;
+}
+</code></pre>
+  </div>
+
+  <div class="q-title"><span class="qnum">Q3</span>Implement the algorithm which counts the number of occurrences of a given word in a given line of text.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s1q3', this)">Copy</button>
+<pre id="s1q3"><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    char t[200];   // t = text
+    char w[50];    // w = word to find
+    int cnt = 0;   // cnt = count
+    char *p;       // p = pointer for searching
+
+    printf("Enter a line of text:\n");
+    gets(t);
+
+    printf("Enter word to count: ");
+    scanf("%s", w);
+
+    p = t;
+
+    while((p = strstr(p, w)) != NULL)
+    {
+        cnt++;
+        p = p + strlen(w);
+    }
+
+    printf("Number of occurrences = %d\n", cnt);
+
+    return 0;
+}
+</code></pre>
+  </div>
+</div>
+
+<!-- ================= SET 2 ================= -->
+<div class="set-block">
+  <div class="set-title">SET-2</div>
+
+  <div class="q-title"><span class="qnum">Q1</span>Implement the algorithm which inserts a given ITEM into a given location in the array.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s2q1', this)">Copy</button>
+<pre id="s2q1"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100];   // array
+    int n, x, p;  // n = elements, x = item, p = position
+    int i;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &amp;n);
+
+    printf("Enter array elements:\n");
+
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf("%d", &amp;a[i]);
+    }
+
+    printf("Enter position: ");
+    scanf("%d", &amp;p);
+
+    printf("Enter item: ");
+    scanf("%d", &amp;x);
+
+    for(i = n; i &gt;= p; i--)
+    {
+        a[i] = a[i - 1];
+    }
+
+    a[p - 1] = x;
+
+    n++;
+
+    printf("Array after insertion:\n");
+
+    for(i = 0; i &lt; n; i++)
+    {
+        printf("%d ", a[i]);
+    }
+
+    return 0;
+}
+</code></pre>
+  </div>
+
+  <div class="q-title"><span class="qnum">Q2</span>Implement the algorithm to delete a given item in the linked list. Implement the linked list using parallel arrays.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s2q2', this)">Copy</button>
+<pre id="s2q2"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int d[10] = {10, 20, 30, 40, 50};  // d = data
+    int nx[10] = {1, 2, 3, 4, -1};     // nx = next index
+
+    int st = 0;      // st = start
+    int x;           // x = item to delete
+    int i, pv = -1, c; // pv = previous, c = current
+
+    printf("Enter item to delete: ");
+    scanf("%d", &amp;x);
+
+    c = st;
+
+    while(c != -1)
+    {
+        if(d[c] == x)
+            break;
+
+        pv = c;
+        c = nx[c];
+    }
+
+    if(c == -1)
+    {
+        printf("Item not found\n");
+    }
+    else
+    {
+        if(pv == -1)
+            st = nx[c];
+        else
+            nx[pv] = nx[c];
+
+        printf("Item deleted successfully\n");
+    }
+
+    printf("Linked List:\n");
+
+    c = st;
+
+    while(c != -1)
+    {
+        printf("%d ", d[c]);
+        c = nx[c];
+    }
+
+    return 0;
+}
+</code></pre>
+  </div>
+</div>
+
+<!-- ================= SET 3 ================= -->
+<div class="set-block">
+  <div class="set-title">SET-3</div>
+
+  <div class="q-title"><span class="qnum">Q1</span>Implement the binary search algorithm which finds the location LOC of the given ITEM in a given sorted array.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s3q1', this)">Copy</button>
+<pre id="s3q1"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100];     // array
+    int n, x;       // n = elements, x = item to search
+    int low, high, mid;
+    int f = 0;      // f = found
+    int i;
+
+    printf("Enter number of elements: ");
+    scanf("%d", &amp;n);
+
+    printf("Enter sorted array:\n");
+
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf("%d", &amp;a[i]);
+    }
+
+    printf("Enter item to search: ");
+    scanf("%d", &amp;x);
+
+    low = 0;
+    high = n - 1;
+
+    while(low &lt;= high)
+    {
+        mid = (low + high) / 2;
+
+        if(a[mid] == x)
+        {
+            printf("Item found at LOC = %d\n", mid + 1);
+            f = 1;
+            break;
+        }
+        else if(x &lt; a[mid])
+        {
+            high = mid - 1;
+        }
+        else
+        {
+            low = mid + 1;
+        }
+    }
+
+    if(f == 0)
+        printf("Item not found\n");
+
+    return 0;
+}
+</code></pre>
+  </div>
+
+  <div class="q-title"><span class="qnum">Q2</span>Implement the algorithm to observe the insertion and deletion operation in a queue.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s3q2', this)">Copy</button>
+<pre id="s3q2"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int q[5];     // q = queue
+    int f = 0;    // f = front
+    int r = -1;   // r = rear
+    int x;        // x = item
+    int ch;       // ch = choice
+    int i;
+
+    while(1)
+    {
+        printf("\n1. Insert\n");
+        printf("2. Delete\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+
+        printf("Enter choice: ");
+        scanf("%d", &amp;ch);
+
+        if(ch == 1)
+        {
+            if(r == 4)
+            {
+                printf("Queue is full\n");
+            }
+            else
+            {
+                printf("Enter item: ");
+                scanf("%d", &amp;x);
+
+                r++;
+                q[r] = x;
+
+                printf("Item inserted\n");
+            }
+        }
+
+        else if(ch == 2)
+        {
+            if(f &gt; r)
+            {
+                printf("Queue is empty\n");
+            }
+            else
+            {
+                printf("Deleted item = %d\n", q[f]);
+                f++;
+            }
+        }
+
+        else if(ch == 3)
+        {
+            if(f &gt; r)
+            {
+                printf("Queue is empty\n");
+            }
+            else
+            {
+                for(i = f; i &lt;= r; i++)
+                {
+                    printf("%d ", q[i]);
+                }
+                printf("\n");
+            }
+        }
+
+        else if(ch == 4)
+        {
+            break;
+        }
+
+        else
+        {
+            printf("Wrong choice\n");
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+  </div>
+</div>
+
+<!-- ================= SET 4 ================= -->
+<div class="set-block">
+  <div class="set-title">SET-4</div>
+
+  <div class="q-title"><span class="qnum">Q1</span>Implement the algorithm to delete a given item in the array.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s4q1', this)">Copy</button>
+<pre id="s4q1"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int a[100];   // array
+    int n, x;     // n = elements, x = item to delete
+    int i, p = -1; // p = position
+
+    printf("Enter number of elements: ");
+    scanf("%d", &amp;n);
+
+    printf("Enter array elements:\n");
+
+    for(i = 0; i &lt; n; i++)
+    {
+        scanf("%d", &amp;a[i]);
+    }
+
+    printf("Enter item to delete: ");
+    scanf("%d", &amp;x);
+
+    for(i = 0; i &lt; n; i++)
+    {
+        if(a[i] == x)
+        {
+            p = i;
+            break;
+        }
+    }
+
+    if(p == -1)
+    {
+        printf("Item not found\n");
+    }
+    else
+    {
+        for(i = p; i &lt; n - 1; i++)
+        {
+            a[i] = a[i + 1];
+        }
+
+        n--;
+
+        printf("Array after deletion:\n");
+
+        for(i = 0; i &lt; n; i++)
+        {
+            printf("%d ", a[i]);
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+  </div>
+
+  <div class="q-title"><span class="qnum">Q3</span>Implement the algorithm to observe the PUSH and POP operation in a stack.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s4q3', this)">Copy</button>
+<pre id="s4q3"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int s[5];     // s = stack
+    int top = -1;
+    int x;        // x = item
+    int ch;       // ch = choice
+
+    while(1)
+    {
+        printf("\n1. PUSH\n");
+        printf("2. POP\n");
+        printf("3. Exit\n");
+
+        printf("Enter choice: ");
+        scanf("%d", &amp;ch);
+
+        if(ch == 1)
+        {
+            if(top == 4)
+            {
+                printf("Stack is full\n");
+            }
+            else
+            {
+                printf("Enter item: ");
+                scanf("%d", &amp;x);
+
+                top++;
+                s[top] = x;
+
+                printf("Item pushed\n");
+            }
+        }
+
+        else if(ch == 2)
+        {
+            if(top == -1)
+            {
+                printf("Stack is empty\n");
+            }
+            else
+            {
+                printf("Popped item = %d\n", s[top]);
+                top--;
+            }
+        }
+
+        else if(ch == 3)
+        {
+            break;
+        }
+
+        else
+        {
+            printf("Wrong choice\n");
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+  </div>
+</div>
+
+<!-- ================= SET 5 ================= -->
+<div class="set-block">
+  <div class="set-title">SET-5</div>
+
+  <div class="q-title"><span class="qnum">Q1</span>Implement the algorithm to insert a new item in the linked list. Demonstrate the linked list using parallel arrays.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s5q1', this)">Copy</button>
+<pre id="s5q1"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int d[10] = {10, 20, 30};  // d = data
+    int nx[10] = {1, 2, -1};   // nx = next index
+
+    int st = 0;   // st = start
+    int x;        // x = new item
+    int N = 3;    // N = new node position
+    int c;        // c = current
+
+    printf("Enter new item: ");
+    scanf("%d", &amp;x);
+
+    d[N] = x;
+    nx[N] = -1;
+
+    c = st;
+
+    while(nx[c] != -1)
+    {
+        c = nx[c];
+    }
+
+    nx[c] = N;
+
+    printf("Linked List after insertion:\n");
+
+    c = st;
+
+    while(c != -1)
+    {
+        printf("%d ", d[c]);
+        c = nx[c];
+    }
+
+    return 0;
+}
+</code></pre>
+  </div>
+
+  <div class="q-title"><span class="qnum">Q3</span>A graph G is represented by means of number of M nodes such that 1,2,...M and a list of N ordered pairs of integers, representing the edges of G. Write a program to find the M x M adjacency matrix of the graph G.</div>
+  <div class="code-wrap">
+    <button class="copy-btn" onclick="copyCode('s5q3', this)">Copy</button>
+<pre id="s5q3"><code>#include &lt;stdio.h&gt;
+
+int main()
+{
+    int mat[10][10]; // mat = adjacency matrix
+    int m, e;        // m = nodes, e = edges
+    int a, b;        // a, b = edge pair
+    int i, j;
+
+    printf("Enter number of nodes (M): ");
+    scanf("%d", &amp;m);
+
+    printf("Enter number of edges (N): ");
+    scanf("%d", &amp;e);
+
+    for(i = 0; i &lt; m; i++)
+    {
+        for(j = 0; j &lt; m; j++)
+        {
+            mat[i][j] = 0;
+        }
+    }
+
+    printf("Enter edges (as pairs, e.g. 1 2):\n");
+
+    for(i = 0; i &lt; e; i++)
+    {
+        scanf("%d %d", &amp;a, &amp;b);
+
+        mat[a - 1][b - 1] = 1;
+        mat[b - 1][a - 1] = 1;
+    }
+
+    printf("Adjacency Matrix:\n");
+
+    for(i = 0; i &lt; m; i++)
+    {
+        for(j = 0; j &lt; m; j++)
+        {
+            printf("%d ", mat[i][j]);
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}
+</code></pre>
+  </div>
+</div>
+
+<script>
+function copyCode(id, btn) {
+    var codeEl = document.getElementById(id);
+    var text = codeEl.innerText;
+
+    navigator.clipboard.writeText(text).then(function() {
+        var originalText = btn.innerText;
+        btn.innerText = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(function() {
+            btn.innerText = originalText;
+            btn.classList.remove("copied");
+        }, 1500);
+    }).catch(function() {
+        var textarea = document.createElement("textarea");
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        var originalText = btn.innerText;
+        btn.innerText = "Copied!";
+        btn.classList.add("copied");
+        setTimeout(function() {
+            btn.innerText = originalText;
+            btn.classList.remove("copied");
+        }, 1500);
+    });
+}
+</script>
+
+</body>
+</html>
